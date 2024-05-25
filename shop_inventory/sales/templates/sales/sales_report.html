@@ -1,11 +1,11 @@
-<!-- sales/templates/sales/sales_report.html -->
-
 <!DOCTYPE html>
 <html>
+{% load static %}
 <head>
     <title>Sales Report</title>
+    <link rel="stylesheet" type="text/css" href="{% static '/styles.css' %}">
 </head>
-<body>
+ <body>
     <h1>Sales Report</h1>
     <table>
         <thead>
@@ -30,8 +30,6 @@
     <p>Total Sales: {{ total_sales }}</p>
     <p>Total Revenue: {{ total_revenue }}</p>
     <a href="{% url 'add_product' %}">Add New Product</a>
- </form>
     <a href="{% url 'index' %}">Back to Products</a>
 </body>
-
 </html>
