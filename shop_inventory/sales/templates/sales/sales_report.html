@@ -5,7 +5,7 @@
     <title>Sales Report</title>
     <link rel="stylesheet" type="text/css" href="{% static '/styles.css' %}">
 </head>
- <body>
+<body>
     <h1>Sales Report</h1>
     <table>
         <thead>
@@ -17,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for product in sales %}
+            {% for product in products %}
             <tr>
                 <td>{{ product.name }}</td>
                 <td>{{ product.description }}</td>
@@ -33,3 +33,4 @@
     <a href="{% url 'index' %}">Back to Products</a>
 </body>
 </html>
+

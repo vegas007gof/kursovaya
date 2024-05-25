@@ -38,6 +38,7 @@ def sales_list(request):
 
 
 def sales_report(request):
+
     start_date = request.GET.get('start_date')
     end_date = request.GET.get('end_date')
 
@@ -46,6 +47,7 @@ def sales_report(request):
     else:
         sales = Sale.objects.all()
 
+    products = Product.objects.all()
     total_sales = sales.aggregate(Sum('quantity_sold'))['quantity_sold__sum'] or 0
     total_revenue = sales.aggregate(Sum('product__price'))['product__price__sum'] or 0
 
@@ -55,6 +57,7 @@ def sales_report(request):
         'total_revenue': total_revenue,
         'start_date': start_date,
         'end_date': end_date,
+        'products': products,
     })
 
 def login_view(request):
