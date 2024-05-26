@@ -48,8 +48,10 @@ def sales_report(request):
         sales = Sale.objects.all()
 
     products = Product.objects.all()
-    total_sales = sales.aggregate(Sum('quantity_sold'))['quantity_sold__sum'] or 0
-    total_revenue = sales.aggregate(Sum('product__price'))['product__price__sum'] or 0
+    sales_summary = Sale.objects.values('product__name').annotate(total_quantity_sold=Sum('quantity_sold')).order_by(
+        'product__name')
+    total_sales = sales.aggregate(total_quantity_sold=Sum('quantity_sold'))['total_quantity_sold'] or 0
+    total_revenue = sales.aggregate(total_revenue=Sum('product__price'))['total_revenue'] or 0
 
     return render(request, 'sales/sales_report.html', {
         'sales': sales,
@@ -58,6 +60,7 @@ def sales_report(request):
         'start_date': start_date,
         'end_date': end_date,
         'products': products,
+        'sales_summary': sales_summary,
     })
 
 def login_view(request):
