@@ -3,29 +3,33 @@
 {% load static %}
 <head>
     <title>Sales Report</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/styles.css' %}">
 </head>
 <body>
     <h1>Sales Report</h1>
     <table>
         <thead>
             <tr>
-                <th>Product</th>
-                <th>Quantity Sold</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Quantity</th>
             </tr>
         </thead>
         <tbody>
-            {% for sale in sales_summary %}
+            {% for product in products %}
             <tr>
-                <td>{{ sale.product__name }}</td>
-                <td>{{ sale.total_quantity_sold }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.quantity }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <h2>Total Quantity Sold: {{ total_sales }}</h2>
-    <h2>Total Revenue: {{ total_revenue }}</h2>
-    <a href="{% url 'sale_create' %}">Add Sale</a>
+    <p>Total Sales: {{ total_sales }}</p>
+    <p>Total Revenue: {{ total_revenue }}</p>
+    <a href="{% url 'add_product' %}">Add New Product</a>
     <a href="{% url 'index' %}">Back to Products</a>
 </body>
 </html>
